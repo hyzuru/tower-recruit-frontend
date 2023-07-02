@@ -1,0 +1,54 @@
+.navbar {
+  display: flex;
+  flex-direction: row-reverse;
+  background: rgb(16,137,247);
+  background: linear-gradient(31deg, rgba(16,137,247,1) 13%, rgba(11,206,209,1) 100%);
+  color: #fff;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  height: 48px;
+}
+
+.pagetitle {
+  font-size: 18px;
+  text-align: center;
+  flex: auto;
+  padding-left: 20px;
+  padding-right: 58px;
+}
+
+.navbar button {
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  color: #fff;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+}
+.menutitle {
+  font-size: 20px;
+  text-align: center;
+  flex: auto;
+  padding-left: 20px;
+  padding-right: 58px;
+}
+
+.menuitem {
+  height: 48px;
+  display: flex;
+  text-decoration: none;
+  flex-basis: 100%;
+  align-items: center;
+  border-bottom: 1px solid #ededed;
+  padding: 0 24px;
+  color: black;
+}
