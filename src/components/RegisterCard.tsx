@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './registerCard.css'
 
 export default function RegisterCard() {
@@ -11,6 +11,14 @@ export default function RegisterCard() {
   const [expiryYear, setExpiryYear] = useState("")
   const [expiry, setExpiry] = useState("")
 
+  useEffect(() => {
+    if (expiryYear !== "" && expiryMonth !== "") {
+      setExpiry(expiryMonth +  "/" + expiryYear)
+    } else {
+      return
+    }
+  }, [expiryMonth,expiryYear])
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -18,7 +26,18 @@ export default function RegisterCard() {
     console.log("CVC: ", cvc)
     console.log("Expiry Month: ", expiryMonth)
     console.log("Expiry Year: ", expiryYear)
-    console.log("Expiry Date: ", expiryMonth +  "/" + expiryYear)
+    console.log("Expiry Date: ", expiry)
+    
+
+    // check to check if hasnt expired (expiry date is later than current date)
+    const currentDate = new Date()
+    const expiryDate = new Date(parseFloat(expiryYear), parseFloat(expiryMonth) - 1)
+    console.log(expiryDate)
+    console.log(currentDate)
+    if (expiryDate > currentDate) {
+      console.log( "expiry date is valid" )
+    }
+
   }
 
   return (
