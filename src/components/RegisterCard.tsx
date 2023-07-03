@@ -11,6 +11,22 @@ export default function RegisterCard() {
   const [expiryYear, setExpiryYear] = useState("")
   const [expiry, setExpiry] = useState("")
 
+  const validateForm = () => {
+
+    // check to check if hasnt expired (expiry date is later than current date)
+    // cards expire at the end of the month
+    const currentDate = new Date()
+    const expiryDate = new Date(parseFloat(expiryYear), parseFloat(expiryMonth), 0)
+    // console.log(expiryDate)
+    // console.log(currentDate)
+
+    return ccnum.length >= 15 && cvc.length >= 3 && expiry.length && expiryDate >= currentDate
+  }
+
+  const handleKeyPress = (e: any) => {
+    if( e.key.match(/^[^0-9]$/)) return e.preventDefault()
+  }
+
   useEffect(() => {
     if (expiryYear !== "" && expiryMonth !== "") {
       setExpiry(expiryMonth +  "/" + expiryYear)
@@ -29,14 +45,7 @@ export default function RegisterCard() {
     console.log("Expiry Date: ", expiry)
     
 
-    // check to check if hasnt expired (expiry date is later than current date)
-    const currentDate = new Date()
-    const expiryDate = new Date(parseFloat(expiryYear), parseFloat(expiryMonth) - 1)
-    console.log(expiryDate)
-    console.log(currentDate)
-    if (expiryDate > currentDate) {
-      console.log( "expiry date is valid" )
-    }
+
 
   }
 
@@ -57,6 +66,7 @@ export default function RegisterCard() {
               name="creditCardNumber" 
               placeholder="Credit Card Number"
               pattern="[0-9]{15,16}"
+              onKeyPress={(e) => handleKeyPress(e)} 
               onChange={(e) => setCcnum(e.target.value)}
               required />
           </div>
@@ -68,6 +78,7 @@ export default function RegisterCard() {
               <input type="tel" inputMode="numeric" name="cvc" maxLength={4} aria-label="CVC" id="cvc"
                 placeholder="CVC"
                 required pattern="[0-9]{3,4}"
+                onKeyPress={(e) => handleKeyPress(e)} 
                 onChange={(e) => setCvc(e.target.value)}
               />
             </div>
@@ -121,7 +132,7 @@ export default function RegisterCard() {
 
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit" disabled={!validateForm()}>Submit</button>
         </form>
 
       </div>
