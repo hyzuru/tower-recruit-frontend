@@ -7,10 +7,15 @@ export default function Navigation() {
 
   const [showMenu, setShowMenu] = useState(false)
 
-  let menu 
+  return (
+    <>
+      <nav>
+        <button onClick={() => setShowMenu(!showMenu)} >
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+      </nav>
 
-  if (showMenu) {
-    menu = <div className="menu">
+      <div className={`menu ${showMenu && 'visible'}`} >
         <header className="navbar">
           <h1 className="menutitle">Menu</h1>
           <button onClick={() => setShowMenu(false)} >
@@ -24,16 +29,6 @@ export default function Navigation() {
           This is another link
         </a>
       </div>
-  }
-
-  return (
-    <>
-      <nav>
-        <button onClick={() => setShowMenu(!showMenu)} >
-          <FontAwesomeIcon icon={faBars} />
-        </button>
-      </nav>
-      {menu}
     </>
   )
 }

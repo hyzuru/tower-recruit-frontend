@@ -8,7 +8,6 @@ import './registerCard.css'
 export default function RegisterCard() {
 
   const [focused, setFocused] = useState(false)
-
   const [ccnum, setCcnum] = useState("")
   const [cvc, setCvc] = useState("")
   const [expiryMonth, setExpiryMonth] = useState("")
@@ -27,7 +26,6 @@ export default function RegisterCard() {
 
     const selectList = document.querySelectorAll(".item-expiry select");
     if (expiryDate >= currentDate) {
-      console.log("validate date true")
       selectList.forEach((sel) => {
         sel.setAttribute("data-valid", "true")
       })
@@ -67,17 +65,14 @@ export default function RegisterCard() {
     console.log("CVC: ", cvc)
     console.log("Expiry Month: ", expiryMonth)
     console.log("Expiry Year: ", expiryYear)
-    console.log("Expiry Date: ", expiry)
-    
+    console.log("Expiry Date: ", expiry) 
   }
 
   return (
     <>
       <div className="credit-card">
         <p className="text">Enter your credit card details: </p>
-
         <form onSubmit={handleSubmit}>
-
           <div className="form-item item-cc">
             <label htmlFor="creditCardNumber">Card Number</label>
             <input type="tel"
@@ -98,7 +93,6 @@ export default function RegisterCard() {
           </div>
 
           <div className="input-row">
-
             <div className="form-item item-cvc">
               <label htmlFor="cvc">CVC</label>
               <input type="tel" inputMode="numeric" name="cvc" maxLength={4} aria-label="CVC" id="cvc"
@@ -168,14 +162,10 @@ export default function RegisterCard() {
                   <FontAwesomeIcon icon={faCheck} />
                 </div>
               </div>
-              
             </fieldset>
-
           </div>
-
           <button type="submit" disabled={!validateForm()}>Submit</button>
         </form>
-
       </div>
     </>
   )
