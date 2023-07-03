@@ -1,9 +1,13 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FormEvent } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import './registerCard.css'
 
 export default function RegisterCard() {
+
+  const [focused, setFocused] = useState(false)
 
   const [ccnum, setCcnum] = useState("")
   const [cvc, setCvc] = useState("")
@@ -12,15 +16,36 @@ export default function RegisterCard() {
   const [expiry, setExpiry] = useState("")
 
   const validateForm = () => {
+    return ccnum.length >= 15 && cvc.length >= 3 && expiry.length && validateExpiry()
+  }
 
+  const validateExpiry = () => {
     // check to check if hasnt expired (expiry date is later than current date)
     // cards expire at the end of the month
     const currentDate = new Date()
     const expiryDate = new Date(parseFloat(expiryYear), parseFloat(expiryMonth), 0)
-    // console.log(expiryDate)
-    // console.log(currentDate)
 
-    return ccnum.length >= 15 && cvc.length >= 3 && expiry.length && expiryDate >= currentDate
+    const selectList = document.querySelectorAll(".item-expiry select");
+    if (expiryDate >= currentDate) {
+      console.log("validate date true")
+      selectList.forEach((sel) => {
+        sel.setAttribute("data-valid", "true")
+      })
+    } else {
+      selectList.forEach((sel) => {
+        sel.setAttribute("data-valid", "false")
+      })
+    }
+    return expiryDate >= currentDate
+  }
+
+  const handleSelectChange = (e:any) => {
+    validateExpiry();
+    setFocused(true);
+  }
+
+  const handleFocus = (e: any) => {
+    setFocused(true)
   }
 
   const handleKeyPress = (e: any) => {
@@ -35,7 +60,7 @@ export default function RegisterCard() {
     }
   }, [expiryMonth,expiryYear])
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     console.log("Credit Card Number: ", ccnum)
@@ -65,7 +90,11 @@ export default function RegisterCard() {
               pattern="[0-9]{15,16}"
               onKeyPress={(e) => handleKeyPress(e)} 
               onChange={(e) => setCcnum(e.target.value)}
+              onBlur={handleFocus} data-focused={focused.toString()}
               required />
+              <div className="valid-icon">
+                <FontAwesomeIcon icon={faCheck} />
+              </div>
           </div>
 
           <div className="input-row">
@@ -77,7 +106,11 @@ export default function RegisterCard() {
                 required pattern="[0-9]{3,4}"
                 onKeyPress={(e) => handleKeyPress(e)} 
                 onChange={(e) => setCvc(e.target.value)}
+                onBlur={handleFocus} data-focused={focused.toString()}
               />
+              <div className="valid-icon">
+                <FontAwesomeIcon icon={faCheck} />
+              </div>
             </div>
 
             <fieldset className="form-item item-expiry">
@@ -91,6 +124,9 @@ export default function RegisterCard() {
                   placeholder="MM"
                   defaultValue=""
                   onChange={(e) => setExpiryMonth(e.target.value)}
+                  data-valid={false}
+                  onBlur={handleSelectChange} 
+                  data-focused={focused.toString()}
                   required >
                     <option value="" disabled hidden>MM</option>
                     <option value="01">01</option>
@@ -113,7 +149,12 @@ export default function RegisterCard() {
                     aria-label="Expiry Year"
                     placeholder="YYYY"
                     defaultValue=""
-                    onChange={(e) => setExpiryYear(e.target.value)}
+                    onChange={(e) => {
+                      setExpiryYear(e.target.value)}
+                    }
+                    onBlur={validateExpiry}
+                    data-focused={focused.toString()}
+                    data-valid={false}
                     required>
                       <option value="" disabled hidden>YYYY</option>
                       <option value="2023">2023</option>
@@ -123,6 +164,9 @@ export default function RegisterCard() {
                       <option value="2027">2027</option>
                       <option value="2028">2028</option>
                     </select>
+                <div className="valid-icon select-valid-icon">
+                  <FontAwesomeIcon icon={faCheck} />
+                </div>
               </div>
               
             </fieldset>
