@@ -1,0 +1,105 @@
+.credit-card {
+  padding: 24px;
+}
+.credit-card form {
+  margin-top: 30px;
+  background-color: #Fff;
+  border: 1px solid rgba(0,0,0,0.3);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+  padding: 20px 14px 28px;
+  border-radius: 6px;
+}
+.form-item {
+  margin-bottom: 14px;
+}
+.credit-card input {
+  margin: 5px 0 0;
+  padding: 8px 12px;
+  display: flex;
+  border: 1px solid #9e9fa1;
+  border-radius: 4px;
+}
+.credit-card label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #616264;
+}
+.item-cc input {
+  width: 16ch;
+}
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.item-cvc input {
+  width: 4ch;
+  margin-right: .5rem;
+}
+.credit-card fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.credit-card fieldset legend {
+  visibility: hidden;
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: -200vh;
+}
+.horizontal-stack {
+  display: flex;
+  gap: .5rem;
+  margin: 5px 0 20px;
+}
+.credit-card div:has(select){
+  margin-bottom: 10px;
+}
+.credit-card select {
+  padding: 8px 12px;
+  border: 1px solid #ababab;
+  border-radius: 4px;
+}
+
+/* form errors */
+.credit-card .error-msg {
+  color: red;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 13px;
+  margin-top: 8px;
+  display: none;
+}
+.credit-card input:invalid {
+  border: 1px solid red;
+}
+.credit-card input:invalid ~ span {
+  display: block;
+}
+.credit-card div:has(select:invalid) ~ span {
+  display: block;
+}
+.credit-card select:invalid {
+  border: 1px solid red;
+}
+
+.credit-card input:valid {
+  border: 2px solid greenyellow
+}
+
+/* submit button */
+.credit-card button[type="submit"] {
+  margin-top: 4px;
+  padding: 16px 32px;
+  background-color: #1089F7;
+  background: rgb(16,137,247);
+  background: linear-gradient(31deg, rgba(16,137,247,1) 13%, rgba(11,206,209,1) 100%);
+  color: #fff;
+  font-weight: 700;
+  width: 100%;
+  border-radius: 6px;
+}
+.credit-card button[type="submit"]:disabled {
+  background: #9e9fa1;
+}

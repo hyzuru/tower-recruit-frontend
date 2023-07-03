@@ -44,9 +44,6 @@ export default function RegisterCard() {
     console.log("Expiry Year: ", expiryYear)
     console.log("Expiry Date: ", expiry)
     
-
-
-
   }
 
   return (
