@@ -1,7 +1,7 @@
 # Tower Recruitment Assignment (Front End)
 
-This is my completed [Tower Recruitment assignment](https://github.com/TowerNZ/Engineering.Recruitment.Frontend).
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is my completed [Tower Recruitment assignment](https://github.com/TowerNZ/Engineering.Recruitment.Frontend).\
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
 I used React, Typescript, & CSS.
 
 
